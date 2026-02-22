@@ -24,7 +24,7 @@ public class TypeAnalyzer implements Function {
                 ));
 
         String chronotype = findMostFrequent(counts);
-        return new SleepAnalysisResult<>("Хронотип", chronotype );
+        return new SleepAnalysisResult<>("Хронотип", chronotype);
     }
 
     private String findMostFrequent(Map<String, Long> counts) {

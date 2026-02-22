@@ -1,6 +1,6 @@
 package ru.yandex.practicum.sleeptracker.exception;
 
-public class FileLoadingException extends RuntimeException{
+public class FileLoadingException extends RuntimeException {
     public FileLoadingException(String message) {
         super(message);
     }

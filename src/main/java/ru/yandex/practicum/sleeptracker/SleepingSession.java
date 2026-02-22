@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class SleepingSession {
-    private List<String> data;
-    private SleepQuality quality;
+    private final List<String> data;
+    private final SleepQuality quality;
 
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
     static final DateTimeFormatter FORMATTERTIME = DateTimeFormatter.ofPattern("HH:mm");
