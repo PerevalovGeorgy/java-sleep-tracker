@@ -22,8 +22,8 @@ public class CounterOfNightWithOutSleep implements Function {
                 .filter(this::isNightSleep)
                 .count();
 
-        LocalDate firstDate = parseDate(sessions.get(0).getStart());
-        LocalDate lastDate = parseDate(sessions.get(sessions.size() - 1).getEnd());
+        LocalDate firstDate = parseDate(sessions.getFirst().getStart());
+        LocalDate lastDate = parseDate(sessions.getLast().getEnd());
 
         int totalNights = Period.between(firstDate, lastDate).getDays() + 1;
         long sleeplessNights = totalNights - nightsWithSleep;

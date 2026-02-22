@@ -3,7 +3,6 @@ package ru.yandex.practicum.sleeptracker;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Comparator;
 
 public class MaxTimeSession implements Function {
 

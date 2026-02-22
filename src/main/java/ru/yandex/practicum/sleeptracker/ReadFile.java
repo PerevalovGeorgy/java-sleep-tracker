@@ -36,7 +36,7 @@ public class ReadFile {
         try (var lines = Files.lines(path, StandardCharsets.UTF_8)) {
             return lines
                     .filter(line -> !line.isBlank())
-                    .map(line -> parseLine(line))
+                    .map(this::parseLine)
                     .map(SleepingSession::new)
                     .collect(Collectors.toCollection(ArrayList::new));
         }
