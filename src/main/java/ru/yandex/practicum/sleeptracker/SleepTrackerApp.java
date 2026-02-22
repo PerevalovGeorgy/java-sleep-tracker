@@ -15,8 +15,6 @@ public class SleepTrackerApp {
 
         try {
             List<SleepingSession> sessions = readFile.readSleepFile(filePath);
-
-            System.out.println("=== АНАЛИЗ ДАННЫХ СНА ===\n");
             executeAndPrintResults(functions, sessions);
 
         } catch (FileLoadingException e) {
