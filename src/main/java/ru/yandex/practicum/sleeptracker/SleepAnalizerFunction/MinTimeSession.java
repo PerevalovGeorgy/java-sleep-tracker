@@ -1,11 +1,13 @@
-package ru.yandex.practicum.sleeptracker;
+package ru.yandex.practicum.sleeptracker.SleepAnalizerFunction;
+
+import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-public class MinTimeSession implements Function {
+public class MinTimeSession implements InterfesForSleepTraker {
 
     @Override
     public SleepAnalysisResult<?> execute(List<SleepingSession> sessions) {

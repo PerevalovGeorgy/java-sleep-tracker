@@ -2,12 +2,14 @@ package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.CountBadSession;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CountBadSessionCompleteTest {
 
@@ -28,10 +30,9 @@ class CountBadSessionCompleteTest {
                 createSession("05.10.25 00:10", "05.10.25 06:20", "GOOD"),
                 createSession("06.10.25 22:30", "07.10.25 05:50", "BAD")
         );
-
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(2L, result.getValue());
+        assertEquals(2L, result.value());
     }
 
     @Test
@@ -41,10 +42,9 @@ class CountBadSessionCompleteTest {
                 createSession("02.10.25 23:50", "03.10.25 06:40", "NORMAL"),
                 createSession("03.10.25 14:10", "03.10.25 15:00", "NORMAL")
         );
-
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(0L, result.getValue());
+        assertEquals(0L, result.value());
     }
 
     @Test
@@ -54,24 +54,23 @@ class CountBadSessionCompleteTest {
                 createSession("02.10.25 22:30", "03.10.25 05:50", "BAD"),
                 createSession("03.10.25 23:45", "04.10.25 06:30", "BAD")
         );
-
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(3L, result.getValue());
+        assertEquals(3L, result.value());
     }
 
     @Test
     void testCountBadSessions_WithEmptyList() {
         SleepAnalysisResult<?> result = countBadSession.execute(new ArrayList<>());
 
-        assertEquals(0L, result.getValue());
+        assertEquals(0L, result.value());
     }
 
     @Test
     void testCountBadSessions_WithNullList() {
         SleepAnalysisResult<?> result = countBadSession.execute(null);
 
-        assertEquals(0L, result.getValue());
+        assertEquals(0L, result.value());
     }
 
     @Test
@@ -84,7 +83,7 @@ class CountBadSessionCompleteTest {
 
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(1L, result.getValue());
+        assertEquals(1L, result.value());
     }
 
     @Test
@@ -94,10 +93,9 @@ class CountBadSessionCompleteTest {
                 createSession("02.10.25 23:40", "03.10.25 08:00", "BAD"),
                 new SleepingSession(Arrays.asList("03.10.25 14:10", "03.10.25 15:00", "UNKNOWN"))
         );
-
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(1L, result.getValue());
+        assertEquals(1L, result.value());
     }
 
     @Test
@@ -108,10 +106,9 @@ class CountBadSessionCompleteTest {
                 createSession("03.10.25 22:30", "04.10.25 06:30", "Bad"),
                 createSession("04.10.25 23:45", "05.10.25 07:00", " BAD ")
         );
-
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(3L, result.getValue());
+        assertEquals(3L, result.value());
     }
 
     @Test
@@ -120,10 +117,9 @@ class CountBadSessionCompleteTest {
                 new SleepingSession(Arrays.asList(null, null, null)),
                 new SleepingSession(Arrays.asList("", "", ""))
         );
-
         SleepAnalysisResult<?> result = countBadSession.execute(sessions);
 
-        assertEquals(0L, result.getValue());
+        assertEquals(0L, result.value());
     }
 
     private SleepingSession createSession(String start, String end, String quality) {

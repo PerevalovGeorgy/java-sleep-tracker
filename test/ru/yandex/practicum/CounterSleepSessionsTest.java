@@ -2,12 +2,15 @@ package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.CounterSleepSessions;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class CounterSleepSessionsTest {
 
@@ -30,8 +33,8 @@ class CounterSleepSessionsTest {
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
         assertNotNull(result);
-        assertEquals("Всего сессий сна", result.getDescription());
-        assertEquals(5L, result.getValue());
+        assertEquals("Всего сессий сна", result.description());
+        assertEquals(5L, result.value());
     }
 
     @Test
@@ -40,7 +43,7 @@ class CounterSleepSessionsTest {
         SleepAnalysisResult<?> result = counter.execute(emptySessions);
 
         assertNotNull(result);
-        assertEquals(0L, result.getValue());
+        assertEquals(0L, result.value());
     }
 
     @Test
@@ -48,7 +51,7 @@ class CounterSleepSessionsTest {
         SleepAnalysisResult<?> result = counter.execute(null);
 
         assertNotNull(result);
-        assertEquals(0L, result.getValue());
+        assertEquals(0L, result.value());
     }
 
     private SleepingSession createSession(String start, String end, String quality) {

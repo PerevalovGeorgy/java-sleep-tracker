@@ -1,4 +1,6 @@
-package ru.yandex.practicum.sleeptracker;
+package ru.yandex.practicum.sleeptracker.SleepAnalizerFunction;
+
+import ru.yandex.practicum.sleeptracker.SleepQuality;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +12,7 @@ public class SleepingSession {
     private final List<String> data;
     private final SleepQuality quality;
 
-    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
     static final DateTimeFormatter FORMATTERTIME = DateTimeFormatter.ofPattern("HH:mm");
     static final DateTimeFormatter FORMATTERDATE = DateTimeFormatter.ofPattern("dd.MM.yy");
     public static final LocalTime NIGHT_END = LocalTime.of(6, 0);

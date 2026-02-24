@@ -2,12 +2,15 @@ package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.MinTimeSession;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MinTimeSessionTest {
 
@@ -30,8 +33,8 @@ class MinTimeSessionTest {
         SleepAnalysisResult<?> result = minTimeSession.execute(sessions);
 
         assertNotNull(result);
-        assertEquals("Минимальная продолжительность сна", result.getDescription());
-        assertEquals("50 мин", result.getValue());
+        assertEquals("Минимальная продолжительность сна", result.description());
+        assertEquals("50 мин", result.value());
     }
 
     @Test
@@ -40,8 +43,8 @@ class MinTimeSessionTest {
         SleepAnalysisResult<?> result = minTimeSession.execute(emptySessions);
 
         assertNotNull(result);
-        assertEquals("Минимальная продолжительность сна", result.getDescription());
-        assertEquals("нет данных", result.getValue());
+        assertEquals("Минимальная продолжительность сна", result.description());
+        assertEquals("нет данных", result.value());
     }
 
     @Test
@@ -49,7 +52,7 @@ class MinTimeSessionTest {
         SleepAnalysisResult<?> result = minTimeSession.execute(null);
 
         assertNotNull(result);
-        assertEquals("нет данных", result.getValue());
+        assertEquals("нет данных", result.value());
     }
 
     private SleepingSession createSession(String start, String end, String quality) {

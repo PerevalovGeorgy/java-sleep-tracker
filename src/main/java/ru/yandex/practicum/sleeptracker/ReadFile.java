@@ -1,5 +1,6 @@
 package ru.yandex.practicum.sleeptracker;
 
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 import ru.yandex.practicum.sleeptracker.exception.FileLoadingException;
 
 import java.io.IOException;

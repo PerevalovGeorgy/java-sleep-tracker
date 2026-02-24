@@ -2,12 +2,14 @@ package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.CounterOfNightWithOutSleep;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CounterOfNightWithOutSleepCompleteTest {
 
@@ -29,7 +31,7 @@ class CounterOfNightWithOutSleepCompleteTest {
         );
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(2L, result.getValue());
+        assertEquals(2L, result.value());
     }
 
     @Test
@@ -42,7 +44,7 @@ class CounterOfNightWithOutSleepCompleteTest {
         );
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(1L, result.getValue());
+        assertEquals(1L, result.value());
     }
 
     @Test
@@ -54,13 +56,13 @@ class CounterOfNightWithOutSleepCompleteTest {
         );
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(3L, result.getValue());
+        assertEquals(3L, result.value());
     }
 
     @Test
     void testSleeplessNights_WithNullAndEmpty() {
-        assertEquals("нет данных", counter.execute(null).getValue());
-        assertEquals("нет данных", counter.execute(new ArrayList<>()).getValue());
+        assertEquals("нет данных", counter.execute(null).value());
+        assertEquals("нет данных", counter.execute(new ArrayList<>()).value());
     }
 
     @Test
@@ -72,17 +74,17 @@ class CounterOfNightWithOutSleepCompleteTest {
 
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(1L, result.getValue());
+        assertEquals(1L, result.value());
     }
 
     @Test
     void testSleeplessNights_WithOneSession() {
-        List<SleepingSession> sessions = Arrays.asList(
+        List<SleepingSession> sessions = List.of(
                 createSession("01.10.25 23:00", "02.10.25 07:00", "GOOD")
         );
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(1L, result.getValue());
+        assertEquals(1L, result.value());
     }
 
     @Test
@@ -94,7 +96,7 @@ class CounterOfNightWithOutSleepCompleteTest {
         );
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(1L, result.getValue());
+        assertEquals(1L, result.value());
     }
 
     @Test
@@ -105,7 +107,7 @@ class CounterOfNightWithOutSleepCompleteTest {
         );
         SleepAnalysisResult<?> result = counter.execute(sessions);
 
-        assertEquals(4L, result.getValue());
+        assertEquals(4L, result.value());
     }
 
     private SleepingSession createSession(String start, String end, String quality) {

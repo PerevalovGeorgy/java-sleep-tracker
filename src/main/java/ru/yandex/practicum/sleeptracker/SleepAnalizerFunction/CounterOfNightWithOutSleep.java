@@ -1,4 +1,6 @@
-package ru.yandex.practicum.sleeptracker;
+package ru.yandex.practicum.sleeptracker.SleepAnalizerFunction;
+
+import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,9 +9,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class CounterOfNightWithOutSleep implements Function {
-
-    private static final LocalTime NIGHT_END = LocalTime.of(6, 0);
+public class CounterOfNightWithOutSleep implements InterfesForSleepTraker {
 
     @Override
     public SleepAnalysisResult<?> execute(List<SleepingSession> sessions) {
@@ -19,7 +19,7 @@ public class CounterOfNightWithOutSleep implements Function {
 
         long nightsWithSleep = sessions.stream()
                 .filter(s -> s != null && s.getStart() != null && s.getEnd() != null)
-                .filter(this::isNightSleep)
+                .filter(CounterOfNightWithOutSleep::isNightSleep)
                 .count();
 
         LocalDate firstDate = parseDate(sessions.getFirst().getStart());
@@ -37,13 +37,21 @@ public class CounterOfNightWithOutSleep implements Function {
                 DateTimeFormatter.ofPattern("dd.MM.yy"));
     }
 
-    private boolean isNightSleep(SleepingSession session) {
+    public static boolean isNightSleep(SleepingSession session) {
         try {
             LocalDateTime start = LocalDateTime.parse(session.getStart(), SleepingSession.FORMATTER);
             LocalDateTime end = LocalDateTime.parse(session.getEnd(), SleepingSession.FORMATTER);
 
+            if (end.isBefore(start)) {
+                end = end.plusDays(1);
+            }
+
+            LocalTime startTime = start.toLocalTime();
+
             return end.toLocalDate().isAfter(start.toLocalDate()) ||
-                    start.toLocalTime().isBefore(NIGHT_END);
+                    startTime.isBefore(SleepingSession.NIGHT_END) ||
+                    (startTime.isAfter(LocalTime.NOON) &&
+                            end.toLocalTime().isBefore(SleepingSession.NIGHT_END));
 
         } catch (Exception e) {
             return false;

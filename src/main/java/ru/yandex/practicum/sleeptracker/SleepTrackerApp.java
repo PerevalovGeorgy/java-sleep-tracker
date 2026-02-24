@@ -1,5 +1,6 @@
 package ru.yandex.practicum.sleeptracker;
 
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.*;
 import ru.yandex.practicum.sleeptracker.exception.FileLoadingException;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class SleepTrackerApp {
         String filePath = "C:\\Users\\Goggy\\Desktop\\учеба java\\7\\src\\main\\resources\\sleep_log.txt";
 
         ReadFile readFile = new ReadFile();
-        List<Function> functions = createFunctionList();
+        List<InterfesForSleepTraker> functions = createFunctionList();
 
         try {
             List<SleepingSession> sessions = readFile.readSleepFile(filePath);
@@ -23,19 +24,19 @@ public class SleepTrackerApp {
         }
     }
 
-    private static List<Function> createFunctionList() {
-        List<Function> functions = new ArrayList<>();
+    private static List<InterfesForSleepTraker> createFunctionList() {
+        List<InterfesForSleepTraker> functions = new ArrayList<>();
         functions.add(new CounterSleepSessions());
         functions.add(new MaxTimeSession());
         functions.add(new MinTimeSession());
         functions.add(new AverageTimeSession());
         functions.add(new CountBadSession());
         functions.add(new CounterOfNightWithOutSleep());
-        functions.add(new TypeAnalyzer());
+        functions.add(new ru.yandex.practicum.sleeptracker.TypeAnalyzer());
         return functions;
     }
 
-    private static void executeAndPrintResults(List<Function> functions, List<SleepingSession> sessions) {
+    private static void executeAndPrintResults(List<InterfesForSleepTraker> functions, List<SleepingSession> sessions) {
         functions.stream()
                 .map(function -> function.execute(sessions))
                 .forEach(System.out::println);

@@ -2,12 +2,15 @@ package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.MaxTimeSession;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MaxTimeSessionTest {
 
@@ -30,8 +33,8 @@ class MaxTimeSessionTest {
         SleepAnalysisResult<?> result = maxTimeSession.execute(sessions);
 
         assertNotNull(result);
-        assertEquals("Максимальная продолжительность сна", result.getDescription());
-        assertEquals("500 мин", result.getValue());
+        assertEquals("Максимальная продолжительность сна", result.description());
+        assertEquals("500 мин", result.value());
     }
 
     @Test
@@ -40,8 +43,8 @@ class MaxTimeSessionTest {
         SleepAnalysisResult<?> result = maxTimeSession.execute(emptySessions);
 
         assertNotNull(result);
-        assertEquals("Максимальная продолжительность сна", result.getDescription());
-        assertEquals("нет данных", result.getValue());
+        assertEquals("Максимальная продолжительность сна", result.description());
+        assertEquals("нет данных", result.value());
     }
 
     @Test
@@ -49,7 +52,7 @@ class MaxTimeSessionTest {
         SleepAnalysisResult<?> result = maxTimeSession.execute(null);
 
         assertNotNull(result);
-        assertEquals("нет данных", result.getValue());
+        assertEquals("нет данных", result.value());
     }
 
     private SleepingSession createSession(String start, String end, String quality) {

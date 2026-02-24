@@ -1,10 +1,12 @@
-package ru.yandex.practicum.sleeptracker;
+package ru.yandex.practicum.sleeptracker.SleepAnalizerFunction;
+
+import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class MaxTimeSession implements Function {
+public class MaxTimeSession implements InterfesForSleepTraker {
 
     @Override
     public SleepAnalysisResult<?> execute(List<SleepingSession> sessions) {
