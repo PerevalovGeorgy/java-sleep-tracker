@@ -10,8 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class CounterOfNightWithOutSleepCompleteTest {
+class CounterOfNightWithOutSleepTest {
 
     private CounterOfNightWithOutSleep counter;
 
@@ -110,8 +111,22 @@ class CounterOfNightWithOutSleepCompleteTest {
         assertEquals(4L, result.value());
     }
 
+    @Test
+    void testSleeplessNights_WithMonthTransition() {
+        List<SleepingSession> sessions = Arrays.asList(
+                createSession("30.09.25 23:00", "01.10.25 07:00", "GOOD"),
+                createSession("01.10.25 23:30", "02.10.25 07:30", "GOOD"),
+                createSession("02.10.25 14:10", "02.10.25 15:00", "NORMAL")
+        );
+        SleepAnalysisResult<?> result = counter.execute(sessions);
+        assertNotNull(result);
+
+        assertEquals(1L, result.value());
+    }
+
     private SleepingSession createSession(String start, String end, String quality) {
         List<String> data = Arrays.asList(start, end, quality);
         return new SleepingSession(data);
     }
+
 }
