@@ -1,8 +1,8 @@
-package test.practicum;
+package ru.yandex.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.MaxTimeSession;
+import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.MinTimeSession;
 import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
 import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 
@@ -13,17 +13,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class MaxTimeSessionTest {
+class MinTimeSessionTest {
 
-    private MaxTimeSession maxTimeSession;
+    private MinTimeSession minTimeSession;
 
     @BeforeEach
     void setUp() {
-        maxTimeSession = new MaxTimeSession();
+        minTimeSession = new MinTimeSession();
     }
 
     @Test
-    void testMaxTime_WithNormalSessions() {
+    void testMinTime_WithNormalSessions() {
         List<SleepingSession> sessions = Arrays.asList(
                 createSession("01.10.25 23:00", "02.10.25 07:00", "GOOD"),
                 createSession("02.10.25 23:50", "03.10.25 06:40", "NORMAL"),
@@ -31,26 +31,26 @@ class MaxTimeSessionTest {
                 createSession("03.10.25 23:40", "04.10.25 08:00", "BAD"),
                 createSession("05.10.25 00:10", "05.10.25 06:20", "GOOD")
         );
-        SleepAnalysisResult<?> result = maxTimeSession.execute(sessions);
+        SleepAnalysisResult<?> result = minTimeSession.execute(sessions);
 
         assertNotNull(result);
-        assertEquals("Максимальная продолжительность сна", result.description());
-        assertEquals("500 мин", result.value());
+        assertEquals("Минимальная продолжительность сна", result.description());
+        assertEquals("50 мин", result.value());
     }
 
     @Test
-    void testMaxTime_WithEmptySessions() {
+    void testMinTime_WithEmptySessions() {
         List<SleepingSession> emptySessions = new ArrayList<>();
-        SleepAnalysisResult<?> result = maxTimeSession.execute(emptySessions);
+        SleepAnalysisResult<?> result = minTimeSession.execute(emptySessions);
 
         assertNotNull(result);
-        assertEquals("Максимальная продолжительность сна", result.description());
+        assertEquals("Минимальная продолжительность сна", result.description());
         assertEquals("нет данных", result.value());
     }
 
     @Test
-    void testMaxTime_WithNullSessions() {
-        SleepAnalysisResult<?> result = maxTimeSession.execute(null);
+    void testMinTime_WithNullSessions() {
+        SleepAnalysisResult<?> result = minTimeSession.execute(null);
 
         assertNotNull(result);
         assertEquals("нет данных", result.value());
