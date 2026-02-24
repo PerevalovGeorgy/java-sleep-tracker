@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TypeAnalyzerCompleteTest {
+class TypeAnalyzerTest {
 
     private ru.yandex.practicum.sleeptracker.TypeAnalyzer typeAnalyzer;
 
