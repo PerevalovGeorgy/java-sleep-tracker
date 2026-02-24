@@ -1,4 +1,4 @@
-package ru.yandex.sleeptracker;
+package test.java.ru.yandex.sleeptracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
