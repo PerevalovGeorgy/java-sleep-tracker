@@ -1,8 +1,9 @@
-package ru.yandex.practicum.sleeptracker;
+package test.practicum;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.SleepAnalizerFunction.SleepingSession;
+import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
